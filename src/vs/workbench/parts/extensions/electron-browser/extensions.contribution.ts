@@ -204,14 +204,14 @@ Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Configuration)
 		properties: {
 			'extensions.autoUpdate': {
 				type: 'string',
-				enum: ['installUpdates', 'notifyUpdates', 'off'],
+				enum: ['checkAndInstall', 'check', 'off'],
 				enumDescriptions: [
-					localize('extensionsInstallUpdates', "Automatically install extension updates when available."),
-					localize('extensionsNotifyUpdates', "Notify when an extension update is available. This will mark extensions with available updates as outdated in the extensions view."),
-					localize('extensionsAutoUpdateOff', "Don't check for extension updates automatically. You can still manually check for updates using the `Extensions: Check for Updates` command.")
+					localize('extensionsAutoUpdateCheckAndInstall', "Install extension updates automatically in the background."),
+					localize('extensionsAutoUpdateCheck', "Check for extension updates and mark extensions with available updates as outdated in the extensions view."),
+					localize('extensionsAutoUpdateOff', "No checks are made automatically for extension updates. You can still manually check for updates using the `Extensions: Check for Updates` command.")
 				],
-				description: localize('extensionsAutoUpdate', "Configures if updates to extensions should be automatically installed or the user is only notified that the update is available or extension updates are not checked at all."),
-				default: 'installUpdates',
+				description: localize('extensionsAutoUpdate', "Controls whether VS Code should check for and/or install extension updates in the background."),
+				default: 'checkAndInstall',
 				scope: ConfigurationScope.APPLICATION
 			},
 			'extensions.ignoreRecommendations': {

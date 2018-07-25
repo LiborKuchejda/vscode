@@ -1191,9 +1191,9 @@ class ToggleAutoUpdateAction extends Action {
 			return;
 		}
 		if (this.autoUpdateValue) {
-			this.enabled = configValue !== 'installUpdates';
+			this.enabled = configValue !== 'checkAndInstall';
 		} else {
-			this.enabled = configValue === 'installUpdates';
+			this.enabled = configValue === 'checkAndInstall';
 		}
 	}
 

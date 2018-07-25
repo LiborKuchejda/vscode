@@ -371,7 +371,7 @@ export class ExtensionsWorkbenchService implements IExtensionsWorkbenchService, 
 	private installed: Extension[] = [];
 	private syncDelayer: ThrottledDelayer<void>;
 	private autoUpdateDelayer: ThrottledDelayer<void>;
-	private continousSyncSetup: boolean = true;
+	private continuousSyncSetup: boolean = true;
 	private disposables: IDisposable[] = [];
 
 	private readonly _onChange: Emitter<void> = new Emitter<void>();
@@ -415,8 +415,8 @@ export class ExtensionsWorkbenchService implements IExtensionsWorkbenchService, 
 				if (this.isAutoUpdateEnabled()) {
 					this.checkForUpdates();
 				}
-				if (!this.continousSyncSetup && this.configurationService.getValue(AutoUpdateConfigurationKey) !== 'off') {
-					this.continousSyncSetup = true;
+				if (!this.continuousSyncSetup && this.configurationService.getValue(AutoUpdateConfigurationKey) !== 'off') {
+					this.continuousSyncSetup = true;
 					this.eventuallySyncWithGallery(true);
 				}
 			}
@@ -613,12 +613,12 @@ export class ExtensionsWorkbenchService implements IExtensionsWorkbenchService, 
 
 	private isAutoUpdateEnabled(): boolean {
 		const configValue = this.configurationService.getValue(AutoUpdateConfigurationKey);
-		return configValue === true || configValue === 'installUpdates';
+		return configValue === true || configValue === 'checkAndInstall';
 	}
 
 	private eventuallySyncWithGallery(immediate = false): void {
 		if (this.configurationService.getValue(AutoUpdateConfigurationKey) === 'off') {
-			this.continousSyncSetup = false;
+			this.continuousSyncSetup = false;
 			return;
 		}
 		const loop = () => this.syncWithGallery().then(() => this.eventuallySyncWithGallery());
