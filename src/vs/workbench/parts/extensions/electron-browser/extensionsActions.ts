@@ -1171,7 +1171,7 @@ export class CheckForUpdatesAction extends Action {
 	}
 }
 
-export class ToggleAutoUpdateAction extends Action {
+class ToggleAutoUpdateAction extends Action {
 
 	constructor(
 		id: string,
@@ -1185,7 +1185,16 @@ export class ToggleAutoUpdateAction extends Action {
 	}
 
 	private updateEnablement(): void {
-		this.enabled = this.configurationService.getValue(AutoUpdateConfigurationKey) !== this.autoUpdateValue;
+		const configValue = this.configurationService.getValue(AutoUpdateConfigurationKey);
+		if (typeof configValue === 'boolean') {
+			this.enabled = configValue !== this.autoUpdateValue;
+			return;
+		}
+		if (this.autoUpdateValue) {
+			this.enabled = configValue !== 'installUpdates';
+		} else {
+			this.enabled = configValue === 'installUpdates';
+		}
 	}
 
 	run(): TPromise<any> {

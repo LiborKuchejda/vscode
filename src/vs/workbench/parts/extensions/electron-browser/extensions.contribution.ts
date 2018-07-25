@@ -203,9 +203,15 @@ Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Configuration)
 		type: 'object',
 		properties: {
 			'extensions.autoUpdate': {
-				type: 'boolean',
-				description: localize('extensionsAutoUpdate', "Automatically update extensions"),
-				default: true,
+				type: 'string',
+				enum: ['installUpdates', 'notifyUpdates', 'off'],
+				enumDescriptions: [
+					localize('extensionsInstallUpdates', "Automatically install extension updates when available."),
+					localize('extensionsNotifyUpdates', "Notify when an extension update is available. This will mark extensions with available updates as outdated in the extensions view."),
+					localize('extensionsAutoUpdateOff', "Don't check for extension updates automatically. You can still manually check for updates using the `Extensions: Check for Updates` command.")
+				],
+				description: localize('extensionsAutoUpdate', "Configures if updates to extensions should be automatically installed or the user is only notified that the update is available or extension updates are not checked at all."),
+				default: 'installUpdates',
 				scope: ConfigurationScope.APPLICATION
 			},
 			'extensions.ignoreRecommendations': {
