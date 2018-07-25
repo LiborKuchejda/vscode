@@ -220,6 +220,12 @@
           "description": "%config.npm.scriptExplorerAction%",
           "scope": "window",
           "default": "open"
+        },
+        "npm.useOnlineResources": {
+          "type": "boolean",
+          "description": "%config.npm.useOnlineResources%",
+          "default": true,
+          "scope": "window"
         }
       }
     },
